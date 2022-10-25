@@ -1,37 +1,59 @@
 
 // Build Results UI and Get Lyrics
-//
-// API Method: track.lyrics.get (https://developer.musixmatch.com/documentation/api-reference/track-lyrics-get)
-// Base URL: https://api.musixmatch.com/ws/1.1/
-// API: /track.lyrics.get
-
+// ==================================================
+// Breakdown:
 // 1. Take results from search and create a list.
 // 2. When the user clicks an item in the list, call track.lyrics.get.
 // 3. Save the response somehow.
 
-function getLyrics() {
+let baseURL = "https://api.musixmatch.com/ws/1.1/"
+let apiKey = "&apikey=53800ed531eed893e70b433586eb11fb"
 
-  let baseURL = "https://api.musixmatch.com/ws/1.1/"
-  let endpoint = "track.lyrics.get"
-  let apiKeyParameter = "&apikey=53800ed531eed893e70b433586eb11fb"
-  let trackIdParameter = "&track_id=248716261" // temp (will get this from search later)
+// Get Top Tracks
+function getTopTracks() {
+  let endpoint = "chart.tracks.get" // Docs: https://developer.musixmatch.com/documentation/api-reference/track-chart-get
 
-  let requestUrl = baseURL + endpoint + "?" + apiKeyParameter + trackIdParameter
+  // Parameters
+  let country = "&country=us"
+  let page = "&page=1"
+  let pageSize = "&page_size=10" // if page=1, this is top X
+  let chartName = "&top" // "top" and "hot" are good choices
+  let onlyReturnTracksWithLyrics = "&f_has_lyrics=1"
+
+  // Request URL
+  let requestUrl = baseURL + endpoint + "?" + apiKey + country + page + pageSize + chartName + onlyReturnTracksWithLyrics
 
   fetch(requestUrl)
     .then(function (response) {
       return response.json()
     })
     .then(function (data) {
-      console.log(data.message.body.lyrics.lyrics_body)
+      console.log(data) // response
+      console.log(data.message.body.track_list) // ** top tracks
     })
 
-  console.log(requestUrl)
+}
+
+getTopTracks()
+
+function getLyrics() {
+  let endpoint = "track.lyrics.get" // Docs: https://developer.musixmatch.com/documentation/api-reference/track-lyrics-get
+  
+  // Parameters
+  let track = "&track_id=248716261" // ** temp (will get this from search later)
+  
+  // Request URL
+  let requestUrl = baseURL + endpoint + "?" + apiKey + track
+
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json()
+    })
+    .then(function (data) {
+      console.log(data) // ** response
+      console.log(data.message.body.lyrics.lyrics_body) // ** track lyrics
+    })
+  
 }
 
 getLyrics()
-
-// Get 
-// curl --location --request GET "https://api.musixmatch.com/ws/1.1/chart.tracks.get?format=json&callback=json&page=1&page_size=10&country=us&apikey=53800ed531eed893e70b433586eb11fb"
-
-//
