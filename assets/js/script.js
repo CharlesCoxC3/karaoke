@@ -1,50 +1,44 @@
-// Build Results UI and Get Lyrics
-// ==================================================
-// To-Do
-// 1. Take results from search and create a list. √
-// 2. When the user clicks an item in the list, call track.lyrics.get.
-// 3. Save the response somehow.
+let songsContainer = document.getElementById("songs-container") // ** may need to edit the id name
+let lyricsContainer = document.getElementById("lyrics-container") // ** may need to edit the id name
 
 let baseURL = "https://api.musixmatch.com/ws/1.1/"
 let apiKey = "&apikey=53800ed531eed893e70b433586eb11fb"
 
 // Get Top Tracks
 function getTopTracks() {
-  // Elements
-  let songsContainer = document.getElementById("songs-container")
-  let topTracksList = document.createElement("ul")
-  topTracksList.setAttribute("id", "top-tracks-list")
-  songsContainer.append(topTracksList)
-  
-  // Endpoint
+  // API endpoint:
   let endpoint = "chart.tracks.get" // docs: https://developer.musixmatch.com/documentation/api-reference/track-chart-get
 
-  // Parameters
+  // API parameters:
   let country = "&country=us"
   let page = "&page=1"
   let pageSize = "&page_size=10" // if page=1, this is top X
   let chartName = "&top" // "top" and "hot" are good choices
   let onlyReturnTracksWithLyrics = "&f_has_lyrics=1"
 
-  // Request URL
+  // API request URL:
   let requestUrl = baseURL + endpoint + "?" + apiKey + country + page + pageSize + chartName + onlyReturnTracksWithLyrics
 
-  // Call and Display Results
+  // Call and display the results.
   fetch(requestUrl)
   .then(function (response) {
     return response.json()
   })
   .then(function (data) {
+    // Create an unordered list, add an ID, and append it to the song container.
+    let topTracksList = document.createElement("ul")
+    topTracksList.setAttribute("id", "top-tracks-list")
+    songsContainer.append(topTracksList)
+    
     for (let i = 0; i < data.message.body.track_list.length; i++) {
       // Create a list item for each track.
       let listItem = document.createElement("li")
       
-      // Create a button for each track.
+      // Create a button for each track, and add a class and track ID.
       let getLyricsButton = document.createElement("button")
       getLyricsButton.textContent = "Get Lyrics"
       getLyricsButton.setAttribute("class", "get-lyrics-button")
-      getLyricsButton.setAttribute("id", data.message.body.track_list[i].track.track_id) // ** use this line or the next one (not both)
-      getLyricsButton.setAttribute("data-track-id", data.message.body.track_list[i].track.track_id) // ** use this line or the previous one (not both)
+      getLyricsButton.setAttribute("data-track-id", data.message.body.track_list[i].track.track_id)
       
       // Add the track name, artist, and button to each list item.
       listItem.textContent =
@@ -55,6 +49,7 @@ function getTopTracks() {
 
       // Add the list item to the list.
       topTracksList.appendChild(listItem)
+
     }
   })
 
@@ -63,34 +58,37 @@ function getTopTracks() {
 getTopTracks()
 
 // Get Lyrics
-function getLyrics() {
-  // Temporary
-  let trackId = "246372347" // ** placeholder (will get this dynamically later)
-
-  // Endpoint
+function getLyrics(event) {
+  // Get track ID from click event.
+  let trackId = event.target.getAttribute("data-track-id")
+  
+  // API endpoint:
   let endpoint = "track.lyrics.get" // docs: https://developer.musixmatch.com/documentation/api-reference/track-lyrics-get
   
-  // Parameters
+  // API parameters:
   let track = "&track_id=" + trackId
   
-  // Request URL
+  // API request URL:
   let requestUrl = baseURL + endpoint + "?" + apiKey + track
 
-  // Call
+  // Call and display results.
   fetch(requestUrl)
   .then(function (response) {
     return response.json()
   })
   .then(function (data) {
-    let lyricsContainer = document.getElementById("lyrics-container")
+    // Create an array of lyric lines.
     let lyrics = data.message.body.lyrics.lyrics_body.split("\n")
+
     for (let i = 0; i < lyrics.length; i++) {
+      // Create a line break and add one after each line.
       let lineBreak = document.createElement("br")
       lyricsContainer.append(lyrics[i])
       lyricsContainer.append(lineBreak)
     }
+    
   })
 
 }
 
-getLyrics()
+songsContainer.addEventListener("click", getLyrics)
