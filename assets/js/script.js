@@ -27,16 +27,21 @@ function getTopTracks() {
     return response.json()
   })
   .then(function (data) {
-    // Create a list, add an ID, and append it to the song container.
+    // Create a "Top Tracks" header and append it to the song container.
+    let topTracksHeader = document.createElement("h3")
+    topTracksHeader.textContent = "Top Tracks"
+    songsContainer.append(topTracksHeader)
+
+    // Create an empty list, add an ID to it, and append it to the song container.
     let topTracksList = document.createElement("ul")
     topTracksList.setAttribute("id", "top-tracks-list")
     songsContainer.append(topTracksList)
     
     for (let i = 0; i < data.message.body.track_list.length; i++) {
-      // Create a list item for each track.
+      // Create an empty list item for each track.
       let listItem = document.createElement("li")
       
-      // Create a button for each track, and add a class, the track ID and name, and the artist name to it.
+      // Create an empty button for each track, and add a class, the track ID and name, and the artist name to it.
       let getLyricsButton = document.createElement("button")
       getLyricsButton.textContent = "Get Lyrics"
       getLyricsButton.setAttribute("class", "get-lyrics-button")
@@ -44,14 +49,16 @@ function getTopTracks() {
       getLyricsButton.setAttribute("data-track-name", data.message.body.track_list[i].track.track_name)
       getLyricsButton.setAttribute("data-artist-name", data.message.body.track_list[i].track.artist_name)
       
-      // Add the track name, artist, and button to each list item.
+      // Add the track name and artist to each list item.
       listItem.textContent =
         "“" + data.message.body.track_list[i].track.track_name + "”" +
         " by " +
         data.message.body.track_list[i].track.artist_name
+      
+        // Append the button to each list item.
       listItem.appendChild(getLyricsButton)
 
-      // Add the list item to the list.
+      // Append the list item to the list.
       topTracksList.appendChild(listItem)
     }
   })
@@ -83,7 +90,7 @@ function getLyrics(event) {
     return response.json()
   })
   .then(function (data) {
-    // Create a header and add the track and artist name to it.
+    // Create a header and append the track and artist name to it.
     let lyricsHeader = document.createElement("h3")
     lyricsHeader.textContent =
       "“" + event.target.getAttribute("data-track-name") + "”" +
@@ -94,11 +101,11 @@ function getLyrics(event) {
     // Create an array of lyric lines.
     let lyrics = data.message.body.lyrics.lyrics_body.split("\n")
     
-    // Remove last three lines (unwanted text from using the free version).
+    // Remove last three lines (**note:** only applicable to the free version).
     lyrics.pop(lyrics.pop(lyrics.pop()))
 
     for (let i = 0; i < lyrics.length; i++) {
-      // Create a line break and add one after each line.
+      // Create a line break and append it after each line.
       let lineBreak = document.createElement("br")
       lyricsContainer.append(lyrics[i])
       lyricsContainer.append(lineBreak)
