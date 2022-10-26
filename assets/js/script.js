@@ -5,17 +5,16 @@
 // 2. When the user clicks an item in the list, call track.lyrics.get.
 // 3. Save the response somehow.
 
-// add this somewhere
-// <h2>Top Tracks</h2>
-// <ul id="top-tracks-list"></ul>
-
 let baseURL = "https://api.musixmatch.com/ws/1.1/"
 let apiKey = "&apikey=53800ed531eed893e70b433586eb11fb"
 
 // Get Top Tracks
 function getTopTracks() {
   // Elements
-  let topTracksList = document.getElementById("top-tracks-list")
+  let songsContainer = document.getElementById("songs-container")
+  let topTracksList = document.createElement("ul")
+  topTracksList.setAttribute("id", "top-tracks-list")
+  songsContainer.append(topTracksList)
   
   // Endpoint
   let endpoint = "chart.tracks.get" // docs: https://developer.musixmatch.com/documentation/api-reference/track-chart-get
@@ -83,7 +82,13 @@ function getLyrics() {
     return response.json()
   })
   .then(function (data) {
-    console.log(data.message.body.lyrics.lyrics_body) // ** track lyrics
+    let lyricsContainer = document.getElementById("lyrics-container")
+    let lyrics = data.message.body.lyrics.lyrics_body.split("\n")
+    for (let i = 0; i < lyrics.length; i++) {
+      let lineBreak = document.createElement("br")
+      lyricsContainer.append(lyrics[i])
+      lyricsContainer.append(lineBreak)
+    }
   })
 
 }
