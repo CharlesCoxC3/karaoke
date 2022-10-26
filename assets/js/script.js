@@ -59,6 +59,9 @@ getTopTracks()
 
 // Get Lyrics
 function getLyrics(event) {
+  // Clear the lyrics container before displaying new lyrics.
+  lyricsContainer.innerHTML = ""
+
   // Get track ID from click event.
   let trackId = event.target.getAttribute("data-track-id")
   
@@ -86,7 +89,7 @@ function getLyrics(event) {
       lyricsContainer.append(lyrics[i])
       lyricsContainer.append(lineBreak)
     }
-    
+
   })
 
 }
