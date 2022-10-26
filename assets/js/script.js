@@ -82,6 +82,8 @@ function getLyrics(event) {
   .then(function (data) {
     // Create an array of lyric lines.
     let lyrics = data.message.body.lyrics.lyrics_body.split("\n")
+    // Remove last two lines.
+    lyrics.pop(lyrics.pop())
 
     for (let i = 0; i < lyrics.length; i++) {
       // Create a line break and add one after each line.
