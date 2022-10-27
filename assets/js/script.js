@@ -1,8 +1,20 @@
-// Container Elements
-let songsContainer = document.getElementById("songs-container") // ** may need to edit the id name
-let lyricsContainer = document.getElementById("lyrics-container") // ** may need to edit the id name
+// Create a container for songs.
+let songsContainer = document.getElementById("songs-container")
 
-// Global API Variables
+// Create a "Top Tracks" header and append it to the songs container.
+let topTracksHeader = document.createElement("h3")
+topTracksHeader.textContent = "Top Tracks"
+songsContainer.append(topTracksHeader)
+
+// Create an empty list, add an ID to it, and append it to the songs container.
+let topTracksList = document.createElement("ul")
+topTracksList.setAttribute("id", "top-tracks-list")
+songsContainer.append(topTracksList)
+
+// Create a container for lyrics.
+let lyricsContainer = document.getElementById("lyrics-container")
+
+// Create global API variables.
 let baseURL = "https://api.musixmatch.com/ws/1.1/"
 let apiKey = "&apikey=53800ed531eed893e70b433586eb11fb"
 
@@ -26,22 +38,12 @@ function getTopTracks() {
   .then(function (response) {
     return response.json()
   })
-  .then(function (data) {
-    // Create a "Top Tracks" header and append it to the song container.
-    let topTracksHeader = document.createElement("h3")
-    topTracksHeader.textContent = "Top Tracks"
-    songsContainer.append(topTracksHeader)
-
-    // Create an empty list, add an ID to it, and append it to the song container.
-    let topTracksList = document.createElement("ul")
-    topTracksList.setAttribute("id", "top-tracks-list")
-    songsContainer.append(topTracksList)
-    
+  .then(function (data) {    
     for (let i = 0; i < data.message.body.track_list.length; i++) {
       // Create an empty list item for each track.
       let listItem = document.createElement("li")
       
-      // Create an empty button for each track, and add a class, the track ID and name, and the artist name to it.
+      // Create a button for each track, and add a class, the track ID and name, and the artist name to it.
       let getLyricsButton = document.createElement("button")
       getLyricsButton.textContent = "Get Lyrics"
       getLyricsButton.setAttribute("class", "get-lyrics-button")
@@ -55,7 +57,7 @@ function getTopTracks() {
         " by " +
         data.message.body.track_list[i].track.artist_name
       
-        // Append the button to each list item.
+      // Append the button to each list item.
       listItem.appendChild(getLyricsButton)
 
       // Append the list item to the list.
@@ -72,7 +74,7 @@ function getLyrics(event) {
   // Clear the lyrics container before displaying the lyrics again.
   lyricsContainer.innerHTML = ""
 
-  // Get the track ID from click event.
+  // Get the track ID from the click event.
   let trackId = event.target.getAttribute("data-track-id")
   
   // Endpoint:
@@ -101,7 +103,7 @@ function getLyrics(event) {
     // Create an array of lyric lines.
     let lyrics = data.message.body.lyrics.lyrics_body.split("\n")
     
-    // Remove last three lines (**note:** only applicable to the free version).
+    // Remove last three lines (**note:** only applicable for the free version).
     lyrics.pop(lyrics.pop(lyrics.pop()))
 
     for (let i = 0; i < lyrics.length; i++) {
