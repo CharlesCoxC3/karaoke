@@ -10,18 +10,81 @@
   </head>
 
   <body>
-    <div class="banner">
-      <div class="navbar">
-          <img src="assets/images/logo.jpg" class="logo">
-        
-            <button class= "text-7xl" type="button">Explore</button>
-            <button type="button">Songbook</button>
-            <button type="button">Artist</button>
-        
-      </div>
+    <!--background-->
+   <div class="w-full h-full bg-scroll bg-cover absolute"
+   style="background-image: url('https://www.wallpaperflare.com/static/616/940/840/glare-circles-colorful-bright-wallpaper.jpg')";>
+      <div>
+        <nav class="p-16 flex justify-end space-x-4"> <!--navigation container-->
+        <!--can be removed for final develop-->
+            <button class="bg-white/40 hover:bg-purple-500 text-white font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded">Explore</button>
+            <button class="bg-white/40 hover:bg-purple-500 text-white font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded">Songbook</button>
+            <button class="bg-white/40 hover:bg-purple-500 text-white font-semibold hover:text-white py-2 px-4 border border-purple-500 hover:border-transparent rounded">Artist</button>
+        </nav>
+      </div><!--end nav -->
+    <!--Artist and song title container-->
+    <main class="max-w-sm w-full lg:max-w-full lg:flex">
+        <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden">
+        </div>
+        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white/30 rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+            <div class="mb-8">
+                <p class="text-sm text-gray-600 flex items-center pt-10 pl-5">
+              <img src="https://ca.slack-edge.com/T03S65LAJ2W-U040RMCRAGZ-d3ec9c918d08-512" class="rounded-full object-contain h-20 w-22" alt="ArtistPic"/>
+              <h2 class="text-xl text-neutral-300 font-medium leading-tight mb-2">Artist's name</h2>
+              
+              <div class="text-3xl text-white font-bold text-xl mb-2 pt-10">Song Title</div>
+                  <p class="text-neutral-100 text-base">Lyrics goes here?? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                  </p>
+            </div>
+        </div>
+    </main>
 
-    </div>
-    </header>
-    <script src="./assets/js/script.js"></script>
+<!--This section is optional. I was just thinking to add something that is interactive?? Was also thinking to put a "like" button LOL-->
+  <!--footer class="bg-black text-center">
+  <div class="px-6 pt-6">
+    <form action="">
+      <div class="grid md:grid-cols-3 gird-cols-1 gap-4 flex justify-center items-center">
+        <div class="md:ml-auto md:mb-6">
+          <p class="text-neutral-300">Sign up for our newsletter</p>
+        </div>
+
+        <div class="md:mb-6">
+          <input
+            type="text"
+            class="
+              form-control
+              block
+              w-full
+              px-3
+              py-1.5
+              text-base
+              font-normal
+              text-gray-700
+              bg-transparent bg-clip-padding
+              border border-solid border-gray-300
+              rounded
+              transition
+              ease-in-out
+              m-0
+              focus:text-gray-700 focus:bg-white focus:border-blue-300 focus:outline-none
+            "
+            id="exampleFormControlInput1"
+            placeholder="Email address"/>
+        </div>
+
+        <div class="md:mr-auto mb-6">
+          <button type="button" class="inline-block px-6 py-2.5 bg-blue-300 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Subscribe</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="text-center text-neutral-300 p-4" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Group 5:
+    <a class="text-neutral-300" href="https://tailwind-elements.com/">Karaoke Finder</a>
+  </div>
+</footer-->
+   </div>
+
+ <script src="./assets/js/script.js"></script>
   </body>
 </html>
