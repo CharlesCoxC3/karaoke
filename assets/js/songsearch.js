@@ -1,10 +1,9 @@
 //variables 
-var songsearchformE1 = document.querySelector('#search-song-form')
+var songsearchformE1 = document.querySelector('#search-form')
 var songresultE1 = document.querySelector('#song-results')
 var mxmatchurl = "http://api.musixmatch.com/ws/1.1/track.search"
 var apikey = "&apikey=53800ed531eed893e70b433586eb11fb"
 var searchcriteria = "?q_track="
-
 
 // song search field
 var songsubmitHandler = function (event) {
