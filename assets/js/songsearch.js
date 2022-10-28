@@ -1,7 +1,12 @@
+//variables 
 var songsearchformE1 = document.querySelector('#search-song-form')
 var songresultE1 = document.querySelector('#song-results')
+var mxmatchurl = "http://api.musixmatch.com/ws/1.1/track.search"
+var apikey = "&apikey=53800ed531eed893e70b433586eb11fb"
+var searchcriteria = "?q_track="
 
 
+// song search field
 var songsubmitHandler = function (event) {
     event.preventDefault();
     var songsearch = songsearchformE1.ariaValueMax.trim();
@@ -13,6 +18,7 @@ var songsubmitHandler = function (event) {
     }
 };
 
+// search button for songs
 var songsearchbutton = function (event) {
     var language =  event.target.getAttribute('data-language');
     if (language) {
@@ -22,8 +28,9 @@ var songsearchbutton = function (event) {
     }
 };
 
+// fetching results for songs
 var getsongresults = function (song) {
-    var apiUrl = 'http://api.musixmatch.com/ws/1.1/track.search?q_track=' + song + '/?=json'
+    var apiUrl = mxmatchurl + "?" + apikey + searchcriteria + song
     fetch(apiUrl)
         .then(function (response){
             if (response.ok) {
@@ -37,6 +44,7 @@ var getsongresults = function (song) {
     });
 };
 
+// displaying songs
 var displaysongs = function (songs, searchTerm) {
     if (songs.length ===0) {
         songresultE1.textContent = 'No songs Found. Try again!';
@@ -52,26 +60,7 @@ var displaysongs = function (songs, searchTerm) {
         var songtitleE1 =document.createElement('span');
         songtitleE1.textContent = songname;
         
-    }
+    };
 
 
-}
-
-
-
-
-//function handlesongsearch (songsearchformE1) {
- //   event.preventdefault()
-
-    //var searchinput = document.getElementById('#songsearch-input');
-
- //   if (songsearchformE1) {
-//        mixnmatchurl = 'http://api.musixmatch.com/ws/1.1/track.search?q_track=' + songsearchformE1 + '/?json';
- //       console.log ()
-//    }
-
-//    ;
-
-//}
-
-//var songsearchbutton = document.getElementById('#songsearch-button')
+};
