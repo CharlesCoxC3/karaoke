@@ -18,7 +18,7 @@ let lyricsContainer = document.getElementById("lyrics-container")
 let baseURL = "https://api.musixmatch.com/ws/1.1/"
 let apiKey = "&apikey=53800ed531eed893e70b433586eb11fb"
 
-// Use a proxy to get around CORS issues.
+// Use a proxy to get around CORS issues. To learn more, see https://github.com/Rob--W/cors-anywhere.
 let proxy = "https://cors-anywhere.herokuapp.com/"
 
 // Get Top Tracks
