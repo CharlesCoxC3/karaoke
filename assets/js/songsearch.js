@@ -28,7 +28,7 @@ var songsearchbutton = function (event) {
 };
 
 // fetching results for songs
-var getsongresults = function (songsearch) {
+var getsongs = function (songsearch) {
     var apiUrl = mxmatchurl + "?" + apikey + "&" + searchcriteria + songsearch
     fetch(apiUrl)
         .then(function (response){
