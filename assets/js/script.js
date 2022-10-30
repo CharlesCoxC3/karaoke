@@ -20,6 +20,7 @@ let baseURL = "https://api.musixmatch.com/ws/1.1/"
 let apiKey = "&apikey=53800ed531eed893e70b433586eb11fb"
 
 // Use a proxy to resolve CORS issue (to learn more, see https://rapidapi.com/pgarciamaurino/api/http-cors-proxy).
+let proxy = "https://http-cors-proxy.p.rapidapi.com/"
 let getOptions = {
   method: "GET",
   headers: {
@@ -28,10 +29,7 @@ let getOptions = {
     "X-RapidAPI-Key": "78b1db622cmshf22a1cb88f4253fp1251abjsn4494c4e92d9c",
     "X-RapidAPI-Host": "http-cors-proxy.p.rapidapi.com"
   }
-};
-
-let proxy = "https://http-cors-proxy.p.rapidapi.com/"
-// **
+}
 
 // Get Top Tracks
 function getTopTracks() {
