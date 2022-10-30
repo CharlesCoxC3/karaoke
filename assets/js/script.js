@@ -46,13 +46,14 @@ function getTopTracks() {
       // Create an empty list item for each track.
       let listItem = document.createElement("li")
       
-      // Create a button for each track, and add a class, the track ID and name, and the artist name to it.
+      // Create a button for each track, and add a class, the track ID and name, the artist name, and a listener to it.
       let getLyricsButton = document.createElement("button")
       getLyricsButton.textContent = "Get Lyrics"
       getLyricsButton.setAttribute("class", "get-lyrics-button")
       getLyricsButton.setAttribute("data-track-id", data.message.body.track_list[i].track.track_id)
       getLyricsButton.setAttribute("data-track-name", data.message.body.track_list[i].track.track_name)
       getLyricsButton.setAttribute("data-artist-name", data.message.body.track_list[i].track.artist_name)
+      getLyricsButton.addEventListener("click", getLyrics)
       
       // Add the track name and artist to each list item.
       listItem.textContent =
@@ -65,6 +66,7 @@ function getTopTracks() {
 
       // Append the list item to the list.
       topTracksList.appendChild(listItem)
+
     }
   })
 
@@ -119,4 +121,3 @@ function getLyrics(event) {
 
 }
 
-songsContainer.addEventListener("click", getLyrics)
