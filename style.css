@@ -33,3 +33,17 @@
    border-radius: 100px;
    border-width: 5px;
 }
+
+li{
+   color: rgb(45, 174, 249);
+   margin: 10px;
+}
+
+.get-lyrics-button{
+   color: rgb(253, 253, 157);
+}
+
+h3{
+   color: rgb(222, 29, 29);
+   text-align: center;
+}

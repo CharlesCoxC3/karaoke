@@ -49,7 +49,7 @@ function getTopTracks() {
       
       // Create a button for each track, and add a class, the track ID and name, the artist name, and a listener to it.
       let getLyricsButton = document.createElement("button")
-      getLyricsButton.textContent = "Get Lyrics"
+      getLyricsButton.textContent = "   Get Lyrics"
       getLyricsButton.setAttribute("class", "get-lyrics-button")
       getLyricsButton.setAttribute("data-track-id", data.message.body.track_list[i].track.track_id)
       getLyricsButton.setAttribute("data-track-name", data.message.body.track_list[i].track.track_name)
@@ -60,7 +60,8 @@ function getTopTracks() {
       listItem.textContent =
         "“" + data.message.body.track_list[i].track.track_name + "”" +
         " by " +
-        data.message.body.track_list[i].track.artist_name
+        data.message.body.track_list[i].track.artist_name +
+        " - "
       
       // Append the button to each list item.
       listItem.appendChild(getLyricsButton)
