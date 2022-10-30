@@ -2,8 +2,8 @@
 var songsearchformE1 = document.querySelector('#search-form')
 var songresultE1 = document.querySelector('#song-results')
 var mxmatchurl = "http://api.musixmatch.com/ws/1.1/track.search"
-var apikey = "&apikey=53800ed531eed893e70b433586eb11fb"
-var searchcriteria = "?q_track="
+var apikey = "apikey=53800ed531eed893e70b433586eb11fb"
+var searchcriteria = "q_track="
 
 // song search field
 var songsubmitHandler = function (event) {
@@ -28,15 +28,15 @@ var songsearchbutton = function (event) {
 };
 
 // fetching results for songs
-var getsongresults = function (song) {
-    var apiUrl = mxmatchurl + "?" + apikey + searchcriteria + song
+var getsongresults = function (songsearch) {
+    var apiUrl = mxmatchurl + "?" + apikey + "&" + searchcriteria + songsearch
     fetch(apiUrl)
         .then(function (response){
             if (response.ok) {
                 console.log(response);
-                response.json().then(function (date){
+                response.json().then(function (data){
                     console.log(data);
-                    displayRepos(data, user);
+                    displaysongs(data,);
             });
         }
 
