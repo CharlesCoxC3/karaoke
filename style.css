@@ -26,3 +26,10 @@
    border-radius: 100px;
    border-width: 5px;
 }
+
+.artist-logo {
+   width: 75%;
+   cursor: pointer;
+   border-radius: 100px;
+   border-width: 5px;
+}
