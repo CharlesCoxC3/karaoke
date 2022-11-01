@@ -94,13 +94,16 @@ function getSearchResults(event) {
   // Prevent the page from reloading.
   event.preventDefault()
 
+    // Clear the search results before displaying the results again.
+    searchResultsList.innerHTML = ""
+
   // Endpoint:
   let endpoint = "track.search" // docs: https://developer.musixmatch.com/documentation/api-reference/track-search
 
   // Parameters:
   let page = "&page=1"
   let pageSize = "&page_size=10"
-  let search = "&q_track=" + encodeURI(document.getElementById("search-input").value)
+  let search = "&q=" + encodeURI(document.getElementById("search-input").value)
   let trackRating = "&s_track_rating=desc"
   let onlyReturnTracksWithLyrics = "&f_has_lyrics=1"
 
