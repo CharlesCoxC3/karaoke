@@ -18,35 +18,36 @@ searchbutton.addEventListener("click", function(event){
   console.log(searchInput.value)
 });
 
-var searchfunction = searchInput.textContent
+var searchfunction = searchInput.value
 console.log(searchfunction)
-var searchrequest = corsproxy + mxmatchurl + apikey + searchcriteria + searchInput + page_size + page + lyric + track_rating
+var searchrequest = corsproxy + mxmatchurl + apikey + searchcriteria + searchInput.value + page_size + page + lyric + track_rating
 console.log(searchrequest)
 fetch(searchrequest)
     .then(function (response) {
-        if (response.ok) {
-        console.log(response.status);
         return response.json();
-        }})
-    .then (function (data) {
-        console.log(data);
-        displaysongs(data);
-      });
-
-var displaysongs = function (songs, searchTerm) {
-        if (songs.length ===0) {
-            songresultE1.textContent = 'No songs Found. Try again!';
-            return;
+    })
+    .then(function (data) {
+        for (var i = 0; i , data.lenght; i++) {
+            var listsongs =document.createElement('li');
+            listsongs.textcontent = data[i].html_url;
+            songsContainer.appendChild(listsongs);
         }
-        songresultE1.textContent = searchTerm;
-        for (var i = 0; i < songs.length; i++) {
-            songname = songs[i];
-            var songE1 =document.createElement('div');
-            songsE1.classList = 'search results';
-            var songtitleE1 =document.createElement('span');
-            songtitleE1.textContent = songname;
+    });
+
+//var displaysongs = function (songs, ) {
+       // if (songs.length === 0) {
+        //    songresultE1.textContent = 'No songs Found. Try again!';
+       //     return;
+      //  }
+      //  songresultE1.textContent = searchTerm;
+       // for (var i = 0; i < songs.length; i++) {
+       //     songname = songs[i];
+       //     var songE1 =document.createElement('div');
+      //      songE1.classList = 'search results';
+       //     var songtitleE1 =document.createElement('span');
+       //     songtitleE1.textContent = songname;
             
-        };
+      //  };
     
     
-    };
+  //  };
