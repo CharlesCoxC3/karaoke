@@ -1,8 +1,8 @@
 
 //variables
 var mxmatchurl = "http://api.musixmatch.com/ws/1.1/track.search"
-var apikey = "?apikey=496263128a610bd00481f1146808045b"
-var corsproxy = "https://http-cors-proxy.p.rapidapi.com/"
+var apikey = "?&apikey=53800ed531eed893e70b433586eb11fb"
+var corsproxy = "https://corsproxy.io/?"
 var searchcriteria = "&q_track="
 var page = "&page=1"
 var page_size = "&page_size=5"
