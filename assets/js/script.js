@@ -1,3 +1,6 @@
+// Get the search button and add a listner to it.
+let searchButton = document.getElementById("search-button")
+searchButton.addEventListener("click", getSearchResults)
 
 // Create a container for songs.
 let songsContainer = document.getElementById("songs-container")
@@ -11,6 +14,16 @@ songsContainer.append(topTracksHeader)
 let topTracksList = document.createElement("ul")
 topTracksList.setAttribute("id", "top-tracks-list")
 songsContainer.append(topTracksList)
+
+// Create a "Search Results" header and append it to the songs container.
+let searchResultsHeader = document.createElement("h3")
+searchResultsHeader.textContent = "Search Results"
+songsContainer.append(searchResultsHeader)
+
+// Create an empty list, add an ID to it, and append it to the songs container.
+let searchResultsList = document.createElement("ul")
+searchResultsList.setAttribute("id", "search-reuslts-list")
+songsContainer.append(searchResultsList)
 
 // Create a container for lyrics.
 let lyricsContainer = document.getElementById("lyrics-container")
@@ -49,7 +62,7 @@ function getTopTracks() {
       
       // Create a button for each track, and add a class, the track ID and name, the artist name, and a listener to it.
       let getLyricsButton = document.createElement("button")
-      getLyricsButton.textContent = "   Get Lyrics"
+      getLyricsButton.textContent = "Get Lyrics"
       getLyricsButton.setAttribute("class", "get-lyrics-button")
       getLyricsButton.setAttribute("data-track-id", data.message.body.track_list[i].track.track_id)
       getLyricsButton.setAttribute("data-track-name", data.message.body.track_list[i].track.track_name)
@@ -75,6 +88,60 @@ function getTopTracks() {
 }
 
 getTopTracks()
+
+// Get Search Results
+function getSearchResults(event) {
+  // Prevent the page from reloading.
+  event.preventDefault()
+
+  // Endpoint:
+  let endpoint = "track.search" // docs: https://developer.musixmatch.com/documentation/api-reference/track-search
+
+  // Parameters:
+  let page = "&page=1"
+  let pageSize = "&page_size=10"
+  let search = "&q_track=" + encodeURI(document.getElementById("search-input").value)
+  let trackRating = "&s_track_rating=desc"
+  let onlyReturnTracksWithLyrics = "&f_has_lyrics=1"
+
+  // Request URL:
+  let requestUrl = proxy + baseURL + endpoint + apiKey + page + pageSize + search + trackRating + onlyReturnTracksWithLyrics
+
+  // Call and display the results:
+  fetch(requestUrl)
+  .then(function (response) {
+    return response.json()
+  })
+  .then(function (data) {
+    for (let i = 0; i < data.message.body.track_list.length; i++) {
+      // Create an empty list item for each track.
+      let listItem = document.createElement("li")
+
+      // Create a button for each track, and add a class, the track ID and name, the artist name, and a listener to it.
+      let getLyricsButton = document.createElement("button")
+      getLyricsButton.textContent = "Get Lyrics"
+      getLyricsButton.setAttribute("class", "get-lyrics-button")
+      getLyricsButton.setAttribute("data-track-id", data.message.body.track_list[i].track.track_id)
+      getLyricsButton.setAttribute("data-track-name", data.message.body.track_list[i].track.track_name)
+      getLyricsButton.setAttribute("data-artist-name", data.message.body.track_list[i].track.artist_name)
+      getLyricsButton.addEventListener("click", getLyrics)
+
+      // Add the track name and artist to each list item.
+      listItem.textContent =
+        "“" + data.message.body.track_list[i].track.track_name + "”" +
+        " by " +
+        data.message.body.track_list[i].track.artist_name +
+        " - "
+      
+      // Append the button to each list item.
+      listItem.appendChild(getLyricsButton)
+
+      // Append the list item to the list.
+      searchResultsList.appendChild(listItem)
+
+    }
+  })
+}
 
 // Get Lyrics
 function getLyrics(event) {
