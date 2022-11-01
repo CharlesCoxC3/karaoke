@@ -7,7 +7,7 @@
 .banner {
    width: 100%;
    height: fit-content;
-   background-image: linear-gradient(rgba(0,0,0,0.75),transparent),url(assets/images/bokehbg.png);
+   background-image: linear-gradient(rgba(0,0,0,0.75),transparent),url(../images/bokehbg.png);
    background-size: cover;
    background-position: center;
    position: relative;
