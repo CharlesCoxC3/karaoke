@@ -19,19 +19,8 @@ let lyricsContainer = document.getElementById("lyrics-container")
 let baseURL = "https://api.musixmatch.com/ws/1.1/"
 let apiKey = "&apikey=53800ed531eed893e70b433586eb11fb"
 
-// Use a proxy to resolve CORS issue (to learn more, see https://rapidapi.com/pgarciamaurino/api/http-cors-proxy).
-let getOptions = {
-  method: "GET",
-  headers: {
-    origin: "https://areas-boot-camp.github.io/karaoke/",
-    "x-requested-with": "https://areas-boot-camp.github.io/karaoke/",
-    "X-RapidAPI-Key": "78b1db622cmshf22a1cb88f4253fp1251abjsn4494c4e92d9c",
-    "X-RapidAPI-Host": "http-cors-proxy.p.rapidapi.com"
-  }
-};
-
-let proxy = "https://http-cors-proxy.p.rapidapi.com/"
-// **
+// Use a simple proxy to resolve CORS issue (to learn more, see https://corsproxy.io).
+let proxy = "https://corsproxy.io/?"
 
 // Get Top Tracks
 function getTopTracks() {
@@ -49,7 +38,7 @@ function getTopTracks() {
   let requestUrl = proxy + baseURL + endpoint + "?" + apiKey + country + page + pageSize + chartName + onlyReturnTracksWithLyrics
 
   // Call and display the results:
-  fetch(requestUrl, getOptions)
+  fetch(requestUrl)
   .then(function (response) {
     return response.json()
   })
@@ -105,7 +94,7 @@ function getLyrics(event) {
   let requestUrl = proxy + baseURL + endpoint + "?" + apiKey + track
 
   // Call and display the results:
-  fetch(requestUrl, getOptions)
+  fetch(requestUrl)
   .then(function (response) {
     return response.json()
   })
