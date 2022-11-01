@@ -20,7 +20,7 @@ searchbutton.addEventListener("click", function(event){
 
 var searchfunction = searchInput.textContent
 console.log(searchfunction)
-var searchrequest = corsproxy + mxmatchurl + apikey + searchcriteria + page_size + page + lyric + track_rating
+var searchrequest = corsproxy + mxmatchurl + apikey + searchcriteria + searchInput + page_size + page + lyric + track_rating
 console.log(searchrequest)
 fetch(searchrequest)
     .then(function (response) {
