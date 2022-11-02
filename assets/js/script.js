@@ -1,3 +1,7 @@
+// JavaScript code for Karaoke Finder.
+// - Search code by Noah (integrated by Christian).
+// - Get lyrics code by Christian.
+
 // Get the search button and add a listner to it.
 let searchButton = document.getElementById("search-button")
 searchButton.addEventListener("click", getSearchResults)
