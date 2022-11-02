@@ -1,0 +1,49 @@
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: sans-serif;
+}
+.banner {
+   width: 100%;
+   height: fit-content;
+   background-image: linear-gradient(rgba(0,0,0,0.75),transparent),url(../images/bokehbg.png);
+   background-size: cover;
+   background-position: center;
+   position: relative;
+}
+.navbar {
+   width: 85%;
+   margin: auto;
+   padding: 35px;
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+}
+.logo {
+   width: 120px;
+   cursor: pointer;
+   border-radius: 100px;
+   border-width: 5px;
+}
+
+.artist-logo {
+   width: 75%;
+   cursor: pointer;
+   border-radius: 100px;
+   border-width: 5px;
+}
+
+li{
+   color: rgb(45, 174, 249);
+   margin: 10px;
+}
+
+.get-lyrics-button{
+   color: rgb(253, 253, 157);
+}
+
+h3{
+   color: rgb(222, 29, 29);
+   text-align: center;
+}
